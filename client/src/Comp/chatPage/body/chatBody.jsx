@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { messageLists } from "../../store/global State";
 
 function ChatBody(props) {
   const { socket } = props;
-  const [messageList, setMessageList] = useState([]);
+  const [messageList, setMessageList] = useAtom(messageLists);
 
   useEffect(() => {
-    console.log();
-
     socket.on("receive_message", (data) => {
-      console.log(data);
-      setMessageList([...messageList, data]);
+      console.log("data", data);
+      setMessageList((messageList) => [...messageList, data]);
     });
   }, [socket]);
+
+  useEffect(() => {
+    console.log(messageList);
+  }, [messageList]);
 
   return (
     <div>
@@ -19,7 +23,13 @@ function ChatBody(props) {
         <h4>body</h4>
         <div>
           {messageList.map((message) => {
-            return message.userId, message.currentMessage, message.time;
+            return (
+              <div>
+                <div> {message.userId} </div>
+                <div> {message.currentMessage} </div>
+                <div> {message.time} </div>
+              </div>
+            );
           })}
         </div>
       </div>
