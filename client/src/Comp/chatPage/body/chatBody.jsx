@@ -24,7 +24,7 @@ function ChatBody(props) {
         <div>
           {messageList.map((message) => {
             return (
-              <div>
+              <div key={`${message.time + message.userId}`}>
                 <div> {message.userId} </div>
                 <div> {message.currentMessage} </div>
                 <div> {message.time} </div>
