@@ -5,6 +5,7 @@ import { userID, roomNumbers } from "../store/global State";
 import ChatHeader from "./header/chatHeader";
 import ChatBody from "./body/chatBody";
 import ChatFooter from "./footer/chatFooter";
+import DarkMode from "../darkMode/darkmode";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -24,6 +25,9 @@ function ChatPage() {
       <ChatHeader />
       <ChatBody socket={socket} />
       <ChatFooter socket={socket} />
+      <div>
+        <DarkMode />
+      </div>
     </div>
   );
 }
